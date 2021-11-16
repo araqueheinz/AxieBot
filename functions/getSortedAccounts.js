@@ -55,7 +55,7 @@ const sortArrayByMmr = scholars => {
     let sortedScholars = scholars.sort ( ( a, b ) => { return  b.mmr - a.mmr } );
     /* DELETE CONSOLE LOG LATER */
     console.log( sortedScholars );
-    return await sortedScholars;
+    return sortedScholars;
   }  catch ( error ) {
     console.error( error );
     return;
