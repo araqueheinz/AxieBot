@@ -13,7 +13,7 @@ const roninAddresses = accounts.map( account => { return account[ 'ronin' ];  })
 const getAccounts = async () => {
   try {
     // Axis API GET call
-    const response = await axios.get( 'https://game-api.axie.technology/api/v1/' + roninAddresses.toString() );
+    const response = await axios.get( "https://game-api.axie.technology/api/v1/" + roninAddresses.toString() );
     // Turn JSON into ARRAY of Objects
     const dataArray = Object.values( response.data ).map( data => { return data } );
     // Function Call
@@ -40,7 +40,7 @@ const buildScholarObject = data => {
         "ronin" : accounts[i].ronin, 
         "link" : "https://marketplace.axieinfinity.com/profile/" + accounts[i].trueRonin + "/axie/"
       }
-      scholarsObjectArray.push(scholar);
+      scholarsObjectArray.push( scholar );
     }
     // Function call
     sortArrayByMmr( scholarsObjectArray )
@@ -52,9 +52,10 @@ const buildScholarObject = data => {
 
 const sortArrayByMmr = scholars => {
   try {
-    let sortedScholars = scholars.sort ( ( a, b ) => { return  b.mmr - a.mmr  });
+    let sortedScholars = scholars.sort ( ( a, b ) => { return  b.mmr - a.mmr } );
     /* DELETE CONSOLE LOG LATER */
-    console.log(sortedScholars);
+    console.log( sortedScholars );
+    return await sortedScholars;
   }  catch ( error ) {
     console.error( error );
     return;
