@@ -1,0 +1,23 @@
+{
+  "name": "axiebot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/araqueheinz/AxieBot.git"
+  },
+  "author": "Heinz Araque",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/araqueheinz/AxieBot/issues"
+  },
+  "homepage": "https://github.com/araqueheinz/AxieBot#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "discord.js": "^13.3.1"
+  }
+}
