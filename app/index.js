@@ -1,1 +1,3 @@
-const getAccounts = require( '../functions/getSortedAccounts' );
+const getTempLeaderBoard = require( '../functions/getTempLeaderBoard' );
+
+getTempLeaderBoard();
