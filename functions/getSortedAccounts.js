@@ -17,7 +17,7 @@ const getAccounts = async () => {
     // Turn JSON into ARRAY of Objects
     const dataArray = Object.values( response.data ).map( data => { return data } );
     // Function Call
-    buildScholarObject( dataArray );
+    return buildScholarObject( dataArray );
 
   } catch ( error ) {
     console.error( error );
@@ -43,7 +43,7 @@ const buildScholarObject = data => {
       scholarsObjectArray.push( scholar );
     }
     // Function call
-    sortArrayByMmr( scholarsObjectArray )
+    return sortArrayByMmr( scholarsObjectArray )
   } catch ( error ) {
     console.error( error );
     return;
@@ -53,8 +53,6 @@ const buildScholarObject = data => {
 const sortArrayByMmr = scholars => {
   try {
     let sortedScholars = scholars.sort ( ( a, b ) => { return  b.mmr - a.mmr } );
-    /* DELETE CONSOLE LOG LATER */
-    console.log( sortedScholars );
     return sortedScholars;
   }  catch ( error ) {
     console.error( error );

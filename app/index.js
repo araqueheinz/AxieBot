@@ -1,1 +1,3 @@
-const getAccounts = require( '../functions/getSortedAccounts' );
+const startBotCommand = require( '../functions/startBot' );
+
+startBotCommand();
