@@ -1,8 +1,8 @@
-   ///////////////////////////////
-  //   GET ALL RONIN ACCOUNTS  //
- //   AND SORT THEM BY MMR    //
-///////////////////////////////
-
+/*
+  Functions tha will get all the accounts
+  and return an array with all the accounts
+  sorted by MMR.
+*/
 const axios = require( 'axios' ).default;
 const accounts = require( '../local/accounts.json' );
 
@@ -38,12 +38,13 @@ const buildScholarObject = data => {
         "mmr" : data[i].mmr,
         "accountName" : data[i].name,
         "ronin" : accounts[i].ronin, 
-        "link" : "https://marketplace.axieinfinity.com/profile/" + accounts[i].trueRonin + "/axie/"
+        "link" : "https://marketplace.axieinfinity.com/profile/" + accounts[i].trueRonin + "/axie/",
+        "totalSLP": data[i].total_slp
       }
       scholarsObjectArray.push( scholar );
     }
     // Function call
-    return sortArrayByMmr( scholarsObjectArray )
+    return sortArrayByMmr( scholarsObjectArray );
   } catch ( error ) {
     console.error( error );
     return;
