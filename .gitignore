@@ -1,3 +1,4 @@
 # dependencies
 /node_modules
 /local/accounts.json
+/local/bot.json
