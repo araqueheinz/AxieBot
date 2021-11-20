@@ -39,7 +39,7 @@ const buildScholarObject = data => {
         "accountName" : data[i].name,
         "ronin" : accounts[i].ronin, 
         "link" : "https://marketplace.axieinfinity.com/profile/" + accounts[i].trueRonin + "/axie/",
-        "totalSLP": data[i].total_slp
+        "totalSLP": data[i].in_game_slp
       }
       scholarsObjectArray.push( scholar );
     }
