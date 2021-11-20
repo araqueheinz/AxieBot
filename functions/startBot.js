@@ -1,5 +1,5 @@
 /*
-  Function that will start the BOT
+  Function that will start the Interval BOT
   & Call setLeaderBoard passing the client
 */
 const { Client, Intents } = require( 'discord.js' );
@@ -12,13 +12,13 @@ client.login( bot.token );
 
 const startBotCommand = () => {
   client.on( 'ready', () => {
-    console.log( 'This bot is now online: ', client.user.tag );
+    console.log( `This bot is now online: ${ client.user.tag }` );
 
     setInterval( () => {
       try {
         setLeaderBoard( client );
       } catch ( error ) {
-        console.log(`Interval has failed:\n ${ error } `);
+        console.log( `Interval has failed:\n ${ error } `);
       }
     }, 5000 ); // 5000 = 5 seconds | 3600000 = 1 hour | 2700000 = 45 min | 1800000 = 30 min
   } );
