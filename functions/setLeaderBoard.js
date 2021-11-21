@@ -29,56 +29,63 @@ const setLeaderBoard = async ( client ) => {
 }
 
 const createEmbedMessage = async ( leaderBoardChannel, scholars ) => {
+  try {
 
-  const embedMessage = new MessageEmbed()
-    .setColor('#0099ff')
-    .setTitle('<:trophy:905316507419045898>  RANKING  <:trophy:905316507419045898>')
-    .setDescription('\u200b \u200B');
-    
-    for ( let i = 0; i < 3; i++ ) {
-      embedMessage.addFields( { name: `${ emojis[i] } ${ scholars[i].name.toUpperCase() }  |  ${ scholars[i].manager.toUpperCase() }`, value: `${ scholars[i].mmr.toString() }`, inline: true } );
-    }
-    embedMessage.addFields( { name: '\u200B',  value: '\u200B' } );
-    embedMessage.addFields( { name: "SCHOLAR", value: '\u200B', inline: true } );
-    embedMessage.addFields( { name: "MANAGER", value: '\u200B', inline: true } );
-    embedMessage.addFields( { name: "<:trophy:905316507419045898> MMR <:trophy:905316507419045898>", value: '\u200B', inline: true } );
+      const embedMessage = new MessageEmbed()
+      .setColor('#0099ff')
+      .setTitle('<:trophy:905316507419045898>  RANKING  <:trophy:905316507419045898>')
+      .setDescription('\u200b \u200B');
+      
+      for ( let i = 0; i < 3; i++ ) {
+        embedMessage.addFields( { name: `${ emojis[i] } ${ scholars[i].name.toUpperCase() }  |  ${ scholars[i].manager.toUpperCase() }`, value: `${ scholars[i].mmr.toString() }`, inline: true } );
+      }
+      embedMessage.addFields( { name: '\u200B',  value: '\u200B' } );
+      embedMessage.addFields( { name: "SCHOLAR", value: '\u200B', inline: true } );
+      embedMessage.addFields( { name: "MANAGER", value: '\u200B', inline: true } );
+      embedMessage.addFields( { name: "<:trophy:905316507419045898> MMR <:trophy:905316507419045898>", value: '\u200B', inline: true } );
 
-    let count    = 0;
-    let names    = '';
-    let managers = '';
-    let mmr      = '';
+      let count    = 0;
+      let names    = '';
+      let managers = '';
+      let mmr      = '';
 
-    for ( let j = 3; j <= scholars.length; j++ ) {
-      count ++;
-      if ( count === 15 || j === scholars.length ) {
-        count = 0;
-        embedMessage.addFields( { name: `${ names.toString() } `,    value: '\u200B', inline: true } )
-        embedMessage.addFields( { name: `${ managers.toString() }`,  value: '\u200B', inline: true } )
-        embedMessage.addFields( { name: `${ mmr.toString() } `,      value: '\u200B', inline: true } )
-        names    = '';
-        managers = '';
-        mmr      = '';
+      for ( let j = 3; j <= scholars.length ; j++ ) {
+
+        if ( count < 15 && j < scholars.length ) {
+          names    += `${  j + 1  }.  ${ scholars[j].name }\n`;
+          managers += `${ scholars[j].manager }\n`;
+          mmr      += `${ scholars[j].mmr.toString() }\n`;
+          count ++;
+        }
+        
+        if ( count === 15 || j === scholars.length ) {
+          count = 0;
+          embedMessage.addFields( { name: `${ names.toString() } `,    value: '\u200B', inline: true } )
+          embedMessage.addFields( { name: `${ managers.toString() }`,  value: '\u200B', inline: true } )
+          embedMessage.addFields( { name: `${ mmr.toString() } `,      value: '\u200B', inline: true } )
+          names    = '';
+          managers = '';
+          mmr      = '';
+        }
+      }
+
+    // Check if channel exists
+    if ( leaderBoardChannel ) {
+      // Fetch a collection of messages with a limit of 1 to ensure that we get only one message
+      let msg = await leaderBoardChannel.messages.fetch( { limit : 1 } );
+      // Check if msg collection is empty then create message
+      if ( Array.from( msg ).length === 0 ) {
+        console.log( `Leaderboard has been created at: ${ getDate() }` );
+        embedMessage.setFooter( `Created at: ${ getDate() }` );
+        leaderBoardChannel.send( { embeds: [embedMessage] });
       } else {
-        names    += `${  j + 1  }.  ${ scholars[j].name }\n`;
-        managers += `${ scholars[j].manager }\n`;
-        mmr      += `${ scholars[j].mmr.toString() }\n`;
-      }  
+        console.log( `Leaderboard has been updated at ${ getDate() }` );
+        embedMessage.setFooter( `Last update: ${ getDate() }` );
+        msg.first().edit( { embeds: [embedMessage] } );
+      }
     }
-
-  // Check if channel exists
-  if ( leaderBoardChannel ) {
-    // Fetch a collection of messages with a limit of 1 to ensure that we get only one message
-    let msg = await leaderBoardChannel.messages.fetch( { limit : 1 } );
-    // Check if msg collection is empty then create message
-    if ( Array.from( msg ).length === 0 ) {
-      console.log( `Leaderboard has been created at: ${ getDate() }` );
-      embedMessage.setFooter( `Created at: ${ getDate() }` );
-      leaderBoardChannel.send( { embeds: [embedMessage] });
-    } else {
-      console.log( `Leaderboard has been updated at ${ getDate() }` );
-      embedMessage.setFooter( `Last update: ${ getDate() }` );
-      msg.first().edit( { embeds: [embedMessage] } );
-    }
+  } catch ( error ) {
+    console.log( error );
   }
 }
 
