@@ -60,9 +60,9 @@ const createEmbedMessage = async ( leaderBoardChannel, scholars ) => {
         
         if ( count === 15 || j === scholars.length ) {
           count = 0;
-          embedMessage.addFields( { name: `${ names.toString() } `,    value: '\u200B', inline: true } )
-          embedMessage.addFields( { name: `${ managers.toString() }`,  value: '\u200B', inline: true } )
-          embedMessage.addFields( { name: `${ mmr.toString() } `,      value: '\u200B', inline: true } )
+          embedMessage.addFields( { name: `${ names.toString() } `,    value: '\u200B', inline: true } );
+          embedMessage.addFields( { name: `${ managers.toString() }`,  value: '\u200B', inline: true } );
+          embedMessage.addFields( { name: `${ mmr.toString() } `,      value: '\u200B', inline: true } );
           names    = '';
           managers = '';
           mmr      = '';
