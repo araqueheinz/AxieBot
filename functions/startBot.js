@@ -20,7 +20,7 @@ const startBotCommand = () => {
       } catch ( error ) {
         console.log( `Interval has failed:\n ${ error } `);
       }
-    }, 5000 ); // 5000 = 5 seconds | 3600000 = 1 hour | 2700000 = 45 min | 1800000 = 30 min
+    }, 5000 ); // 5000 = 5 seconds |  6300000 = 1 hour & 45 min  | 3600000 = 1 hour | 2700000 = 45 min | 1800000 = 30 min
   } );
 }
 
