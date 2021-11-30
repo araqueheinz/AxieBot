@@ -30,7 +30,7 @@ client.on( "ready", async () => {
       console.log( "\nERROR! Could not get the leaderboard channel..." );
     }
 
-  }, 10000 ); // 5000 = 5 seconds 7200000 = 2 hour |  6300000 = 1 hour & 45 min  | 3600000 = 1 hour | 2700000 = 45 min | 1800000 = 30 min
+  }, 3600000 ); // 5000 = 5 seconds 7200000 = 2 hour |  6300000 = 1 hour & 45 min  | 3600000 = 1 hour | 2700000 = 45 min | 1800000 = 30 min
 });
 
 
