@@ -30,6 +30,7 @@ let globalScholars = []
 
 const setLeaderBoard = async ( leaderBoardChannel, scholars ) => {
   try {
+    console.log( "Starting to set Leaderboard...." )
     // Fill global scholars variable with scholars argument
     globalScholars = [ ...scholars ];
   

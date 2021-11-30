@@ -1,13 +1,12 @@
 const axios    = require( "axios" ).default;
-const accounts = require( "../../local/accounts.json" );
 
 /**
  * @returns an Array of Objects containing the accounts information
  */
 
-const getAccounts = async () => {
+const getAccounts = async ( accounts ) => {
   try {
-    console.log( "Fetching....." );
+    console.log( "\nFetching Accounts....." );
     // Turn all the ronin addresses into a single string separated by commas
     const roninAddresses = accounts.map( account => { return account[ 'ronin' ];  } ).join(',');
     // Axios API GET all accounts
@@ -17,7 +16,7 @@ const getAccounts = async () => {
       // If soo, call yourself again, to try an new API call
       if ( data.mmr === undefined ){
         console.log( "API Fetch Attempt Failed" );
-        getAccounts();
+        getAccounts( accounts );
       }
     });
     console.log( "API Fetch Successful" );

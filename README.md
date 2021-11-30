@@ -1,3 +1,2 @@
 # AxieBot
-- Channel Id is in setLeaderBoard.js
-- Bot token is in startBot.js
+- Channel Id & Bot token is in DiscordBot/startDiscordBot.js
