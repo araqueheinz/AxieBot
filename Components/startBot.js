@@ -6,6 +6,7 @@ const { Client, Intents } = require( 'discord.js' );
 const bot = require('../local/bot.json' );
 const client = new Client( { intents: [ Intents.FLAGS.GUILDS, "GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES" ] } );
 const setLeaderBoard = require( './setLeaderBoard' );
+//const setLeaderBoard = require( './setLeaderBoard-text' );
 
 /* Toggle between test_token & token */
 client.login( bot.token );
@@ -20,7 +21,7 @@ const startBotCommand = () => {
       } catch ( error ) {
         console.log( `Interval has failed:\n ${ error } `);
       }
-    }, 5000 ); // 5000 = 5 seconds |  6300000 = 1 hour & 45 min  | 3600000 = 1 hour | 2700000 = 45 min | 1800000 = 30 min
+    }, 5000 ); // 5000 = 5 seconds 7200000 = 2 hour |  6300000 = 1 hour & 45 min  | 3600000 = 1 hour | 2700000 = 45 min | 1800000 = 30 min
   } );
 }
 

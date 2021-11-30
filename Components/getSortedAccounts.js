@@ -8,23 +8,37 @@ const accounts = require( '../local/accounts.json' );
 const heinzAccounts = require( '../local/heinzAccounts.json' );
 
 // Save all ronin addresses into one array
-let roninAddresses;
-let selectedAccounts;
+let globalRoninAddresses;
+let globalSelectedAccounts;
+let globalCount = 0;
 
 // GET all account by using ronin addresses
 const getAccounts = async ( sortBy = 'mmr', accountOwner = '' ) => {
   try {
     if ( accountOwner === 'heinz' ) {
-      roninAddresses = heinzAccounts.map( account => { return account[ 'ronin' ];  });
-      selectedAccounts = heinzAccounts;
+      globalRoninAddresses = heinzAccounts.map( account => { return account[ 'ronin' ];  } ).join(',');
+      globalSelectedAccounts = heinzAccounts;
     } else {
-      roninAddresses = accounts.map( account => { return account[ 'ronin' ];  });
-      selectedAccounts = accounts;
+      globalRoninAddresses = accounts.map( account => { return account[ 'ronin' ];  } ).join(',');
+      globalSelectedAccounts = accounts;
     }
     // Axis API GET call
-    const response = await axios.get( "https://game-api.axie.technology/api/v1/" + roninAddresses.toString() );
+    const response = await axios.get( "https://game-api.axie.technology/api/v1/" + globalRoninAddresses );
     // Turn JSON into ARRAY of Objects
-    const dataArray = Object.values( response.data ).map( data => { return data } );
+    const dataArray = Object.values( response.data ).map( data => { 
+      if ( data.mmr !== undefined ) {
+        return data;
+      } else {
+        if ( globalCount === 3 ){
+          console.log( "API Call Failed, Wait for next interval!" );
+          return;
+        } else {
+          globalCount ++;
+          console.log( `API Call try number: ${ globalCount }` );
+          getAccounts( sortBy, accountOwner );
+        }
+      }
+    } );
     // Function Call
     return buildScholarObject( dataArray, sortBy );
 
@@ -39,14 +53,14 @@ const buildScholarObject = ( data, sortBy ) => {
   try {
     let scholarsObjectArray = []
     // Create custom object with the data we need
-    for (let i = 0; i < selectedAccounts.length; i ++) {
+    for (let i = 0; i < globalSelectedAccounts.length; i ++) {
       let scholar = {
-        "manager": selectedAccounts[i].manager,
-        "name" : selectedAccounts[i].name,
+        "manager": globalSelectedAccounts[i].manager,
+        "name" : globalSelectedAccounts[i].name,
         "mmr" : data[i].mmr,
         "accountName" : data[i].name,
-        "ronin" : selectedAccounts[i].ronin, 
-        "link" : "https://marketplace.axieinfinity.com/profile/" + selectedAccounts[i].trueRonin + "/axie/",
+        "ronin" : globalSelectedAccounts[i].ronin, 
+        "link" : "https://marketplace.axieinfinity.com/profile/" + globalSelectedAccounts[i].trueRonin + "/axie/",
         "totalSLP": data[i].in_game_slp
       }
       scholarsObjectArray.push( scholar );

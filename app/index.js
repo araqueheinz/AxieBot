@@ -1,9 +1,9 @@
-const startBotCommand = require( '../functions/startBot' );
-const getDailySLP = require( '../functions/getDailySLP' );
+const getAccounts = require( "../Components/Accounts/index" );
+const startBot    = require( "../Components/DiscordBot/index" );
 
-/*
- Function that can accept two parameters
- 2nd parameter is to decide who's accounts are going to be fetch ( 'heinz' , '' = all accounts will be fetched )
- */
-//getDailySLP( 'heinz' );
-startBotCommand();
+const main = async () => {
+  const allAccounts = await getAccounts();
+  startBot( allAccounts );
+}
+
+main();
