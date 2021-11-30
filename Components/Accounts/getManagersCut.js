@@ -12,7 +12,7 @@ const main = async ( accounts, cut ) => {
   const slpPrice = getSlpPrice.data['smooth-love-potion'].usd;
   const managersSlpCut = allSLP * ( cut / 100 );
   const managersCut = managersSlpCut * slpPrice;
-  console.log( `Current SLP price: ${ slpPrice.toFixed( 5 ) }` );
+  console.log( `Current SLP price: ${ slpPrice.toFixed( 6 ) }` );
   console.log( `Managers Cut at ${cut}%: ${ managersSlpCut } SLP, a total of \$${ managersCut.toFixed( 2 ) } ` );
 }
 

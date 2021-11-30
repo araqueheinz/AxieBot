@@ -47,12 +47,12 @@ const setLeaderBoard = async ( leaderBoardChannel, scholars ) => {
     while ( globalScholars.length > 0 ){
       await createEmbedMessage( leaderBoardChannel );
     }
-    console.log( `Leader Board set SUCCESSFULLY!` );
+    console.log( `Leaderboard has been set SUCCESSFULLY!` );
 
     globalCount = 3;
   } catch ( error ) {
     console.log( error );
-    console.log( `Setting Leader Board has FAILED!` );
+    console.log( `Setting Leaderboard has FAILED!` );
   }
   console.log( `Last update: ${ getDate() }` );
 }
@@ -71,7 +71,7 @@ const setPodiumScholars = async ( leaderBoardChannel ) => {
       podiumMessage.setImage( `${ globalChampionsGif[ ran ] }` )
       globalScholars.splice( 0, 3 );
       // Check if msg collection is empty then create message
-      leaderBoardChannel.send( { embeds: [podiumMessage] } );
+      leaderBoardChannel.send( { embeds: [ podiumMessage ] } );
   } catch ( error ) {
     console.log( error );
   }
@@ -88,7 +88,7 @@ const createEmbedMessage = async ( leaderBoardChannel ) => {
     }
     globalScholars.splice( 0, 24 );
 
-    leaderBoardChannel.send( { embeds: [embedMessage] } )
+    leaderBoardChannel.send( { embeds: [ embedMessage]  } )
   } catch ( error ) {
     console.log( error );
   }
