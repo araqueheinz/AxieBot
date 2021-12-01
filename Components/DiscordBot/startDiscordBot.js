@@ -19,7 +19,7 @@ client.on( "ready", async () => {
     const allAccounts = await getAccounts();
 
     /* Toggle between test_channel_ID & channel_ID */
-    const leaderBoardChannel =  await client.channels.fetch( bot.test_channel_ID );
+    const leaderBoardChannel =  await client.channels.fetch( bot.channel_ID );
 
     if ( leaderBoardChannel ) {
       console.log( `\nChannel: ${ leaderBoardChannel.name } found!` );
@@ -30,13 +30,13 @@ client.on( "ready", async () => {
       console.log( "\nERROR! Could not get the leaderboard channel..." );
     }
 
-  }, 3600000 ); // 5000 = 5 seconds 7200000 = 2 hour |  6300000 = 1 hour & 45 min  | 3600000 = 1 hour | 2700000 = 45 min | 1800000 = 30 min
+  }, 3600000 ); // 10800000 = 3 hour | 7200000 = 2 hour |  6300000 = 1 hour & 45 min  | 3600000 = 1 hour | 2700000 = 45 min | 1800000 = 30 min | 5000 = 5 seconds
 });
 
 
 const startBot = async() => {
   /* Toggle between test_token & token */
-  client.login( bot.test_token );
+  client.login( bot.token );
 }
 
 module.exports = startBot;

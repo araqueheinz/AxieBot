@@ -30,7 +30,8 @@ let globalScholars = []
 
 const setLeaderBoard = async ( leaderBoardChannel, scholars ) => {
   try {
-    console.log( "Starting to set Leaderboard...." )
+    console.log( "Starting to set Leaderboard...." );
+
     // Fill global scholars variable with scholars argument
     globalScholars = [ ...scholars ];
   
@@ -52,24 +53,31 @@ const setLeaderBoard = async ( leaderBoardChannel, scholars ) => {
     globalCount = 3;
   } catch ( error ) {
     console.log( error );
+
     console.log( `Setting Leaderboard has FAILED!` );
   }
+
   console.log( `Last update: ${ getDate() }` );
 }
 
 const setPodiumScholars = async ( leaderBoardChannel ) => {
   try {
+
     let ran = Math.floor( Math.random() * globalChampionsGif.length );
+
     const podiumMessage = new MessageEmbed()
       .setColor('#ffee00')
       .setTitle('<:trophy:905316507419045898>  RANKING  <:trophy:905316507419045898>')
-      .setDescription('\u200B')
+      .setDescription('\u200B');
+
       for ( let i = 0; i < 3; i++ ) {
         podiumMessage.addFields( { name: `${ emojis[i] } ${ globalScholars[i].name.toUpperCase() }`, value: `[${ globalScholars[i].mmr }](${globalScholars[i].link})   |  ${ globalScholars[i].manager }`, inline: true } );
-        
       }
-      podiumMessage.setImage( `${ globalChampionsGif[ ran ] }` )
+
+      podiumMessage.setImage( `${ globalChampionsGif[ ran ] }` );
+
       globalScholars.splice( 0, 3 );
+
       // Check if msg collection is empty then create message
       leaderBoardChannel.send( { embeds: [ podiumMessage ] } );
   } catch ( error ) {
@@ -82,13 +90,16 @@ const createEmbedMessage = async ( leaderBoardChannel ) => {
     const embedMessage = new MessageEmbed()
     .setColor('#0099ff')
     .setDescription('\u200B');
+
     for ( let i = 0; i < globalScholars.length  && i < 24; i++ ) {
       embedMessage.addFields( { name: `\` ${ globalCount + 1 }. \`${globalScholars[i].name.toUpperCase() }`, value: `[${ globalScholars[i].mmr }](${globalScholars[i].link}) | ${ globalScholars[i].manager }`, inline: true } );
       globalCount = globalCount + 1;
     }
+
     globalScholars.splice( 0, 24 );
 
-    leaderBoardChannel.send( { embeds: [ embedMessage]  } )
+    leaderBoardChannel.send( { embeds: [ embedMessage]  } );
+    
   } catch ( error ) {
     console.log( error );
   }
